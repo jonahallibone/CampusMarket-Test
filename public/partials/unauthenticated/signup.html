@@ -1,0 +1,123 @@
+<div class="card card-block signup-card">
+  <div class="cover-loader animated fadeIn" ng-if="posting">
+    <div class="spinner-container">
+      <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+      </div>
+    </div>
+  </div>
+  <h1>Sign Up</h1>
+  <form role="form" name="signupForm" novalidate ng-submit="uploadPic(croppedDataUrl)">
+  <div class="form-group text-center">
+    <span ng-show="imageError" style="color: #c0392b; padding-bottom: 1em; font-weight: bold;">Please choose a profile picture</span>
+    <div class="profile-image">
+      <label for="file">Please upload a profile image</label>
+      <br />
+      <label for="file" class="btn btn-green btn-lg">Choose Profile Picture</label>
+      <div class="profile-preview">
+        <img-crop image="picFile  | ngfDataUrl"
+            result-image="croppedDataUrl" ng-init="croppedDataUrl=''">
+          </img-crop>
+      </div>
+      <input type="file" id="file"
+        ngf-select="picFile"
+        ngf-drop="picFile"
+        ng-model="picFile"
+        name="file"
+        accept="image/*"
+        ngf-max-size="10MB"
+        required
+        ngf-model-invalid="errorFiles"
+        style="display:none;"
+        ngf-accept="'image/*'"
+        ngf-pattern="'.png,.jpg,.jpeg,!.mp4,!.gif,!.jog,!.psd'"
+        ngf-max-files="1"
+        ngf-max-size="10MB"
+        ngf-fix-orientation= "true"
+        ngf-capture="'other'"
+        >
+
+    </div>
+  </div>
+  <div class="form-group" ng-class="{ 'has-error' : signupForm.email.$invalid && !signupForm.email.$pristine }">
+    <label for="email">Email ending in .edu</label>
+    <input type="email" autocomplete="off" class="form-control" ng-model="user.email" email ng-pattern="/(\.edu(\.[a-zA-Z]+)?|\.ac\.[a-zA-Z]+)$/i" id="email" placeholder="Email must end in .edu" name="email" required>
+    <div ng-show="signupForm.email.$touched">
+         <span ng-show="signupForm.email.$error.required" style="color: red;">Email required</span>
+         <span ng-show="signupForm.email.$error.pattern" style="color: red;">Email <strong>must</strong> end in .edu</span>
+         <span ng-show="signupForm.email.$error.email" style="color: red;">Email taken!</span>
+    </div>
+  </div>
+  <div class="form-group" ng-class="{ 'has-error' : signupForm.firstname.$invalid && !signupForm.firstname.$pristine }">
+    <label for="fname">First Name</label>
+    <input type="text" class="form-control" id="fname" ng-model="user.firstName" placeholder="First Name" name="firstname" required>
+    <div ng-show="signupForm.firstname.$touched">
+        <span ng-show="signupForm.firstname.$error.required" style="color: red;" ng-cloak>First name required</span>
+    </div>
+  </div>
+  <div class="form-group" ng-class="{ 'has-error' : signupForm.lastname.$invalid && !signupForm.lastname.$pristine }">
+    <label for="lastname">Last Name</label>
+    <input type="text" class="form-control" id="lastname" ng-model="user.lastName" placeholder="Last Name" name="lastname" required>
+    <div ng-show="signupForm.lastname.$touched">
+            <span ng-show="signupForm.lastname.$error.required" style="color: red;">Last name required</span>
+    </div>
+  </div>
+  <div class="form-group" ng-class="{ 'has-error' : signupForm.username.$invalid && !signupForm.username.$pristine }">
+    <label for="username">Username</label>
+    <input autocomplete="off" type="text" class="form-control" id="username" username ng-model="user.username" placeholder="Username" name="username" required>
+    <div ng-show="signupForm.username.$touched">
+        <span ng-show="signupForm.username.$error.required" style="color: red;">Username required</span>
+        <span ng-show="signupForm.username.$error.username" style="color: red;">That username is taken!</span>
+    </div>
+  </div>
+ <div class="form-group">
+    <label for="gradclass">Graduation Year</label>
+    <input type="number" class="form-control" min="2016" max="2024" id="gradclass" name="gradclass" ng-model="user.gradClass" placeholder="Graduation Year" required>
+    <div ng-show="signupForm.school.$touched">
+            <span ng-show="signupForm.gradclass.$error.required" style="color: red;">Graduaton date required</span>
+            <span ng-show="signupForm.gradclass.$error.number" style="color: red;">Not valid number!</span>
+            <span ng-show="signupForm.gradclass.$error.min" style="color: red;">Must be 2016 or later</span>
+            <span ng-show="signupForm.gradclass.$error.max" style="color: red;">Must be before 2024!</span>
+            <span ng-show="!signupForm.gradclass.$valid" style="color: red;">Graduation year between 2016 to 2024</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="school">School</label>
+    <select class="form-control" id="school" ng-model="user.schoolId" name="school" required>
+      <option disabled selected="selected" value="0">Choose School</option>
+      <option value="1">Champlain College</option>
+      <option value="2">UVM</option>
+    </select>
+    <div ng-show="signupForm.school.$touched">
+            <span ng-show="signupForm.school.$error.required" style="color: red;">Please select a school</span>
+    </div>
+  </div>
+  <div class="form-group" ng-class="{ 'has-error' : signupForm.password.$invalid && !signupForm.password.$pristine }">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password" ng-model="user.password" equals="{{ user.passwordCheck }}" ng-minlength= "6" placeholder="Password" name="password" required>
+    <div ng-show="signupForm.password.$touched">
+      <span ng-show="signupForm.password.$error.required" style="color: red;">Confirm Password</span>
+      <span ng-show="signupForm.password.$error.minlength" style="color: red;">Must be 6 characters long</span>
+    </div>
+  </div>
+  <div class="form-group" ng-class="{ 'has-error' : signupForm.password2.$invalid && !signupForm.password2.$pristine }">
+    <label for="password-2">Password Again</label>
+    <input type="password" class="form-control" id="password-2" ng-model="user.passwordCheck" equals=" {{ user.password }}" ng-minlength = "6" placeholder="Password Again" name="password2" required>
+    <div ng-show="signupForm.password2.$touched">
+        <span ng-show="signupForm.password2.$error.required" style="color: red;">Confirm Password</span>
+        <span ng-show="signupForm.password2.$error.minlength" style="color: red;">Must be 6 characters long</span>
+        <span ng-show="signupForm.password2.$error.equals" style="color: red;">Passwords do not match</span>
+    </div>
+  </div>
+  <div class="login-bottom-container">
+    <input type="submit" class="btn btn-green btn-lg" value="Sign up" ng-disabled="signupForm.$invalid" ng-click="submitted = true">
+    <!-- <button class="btn btn-green btn-lg" ng-disabled="signupForm.$invalid" ng-click="Sign up()">Sign up</button>-->
+    <div class="right">
+       <a ui-sref="termsState" style="margin-top: 1em; display: block;">By signing up you agree to the terms and conditions of The Black Market University, LLC.</a>
+    </div>
+    <span ng-show="picFile.result">Upload Successful</span>
+    <span class="err" ng-show="errorMsg">Error making account.</span>
+  </div>
+</form>
+</div>

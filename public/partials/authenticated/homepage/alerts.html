@@ -1,0 +1,10 @@
+    <div class="row">
+      <span class="close">
+        <i class="glyphicon glyphicon-remove"></i>
+      </span>
+      <div class="col-xs-12 text-left">
+        <span class="profile-image" style="background-image:url('https://www.blackmarketu.com/{{ ::alert.user['profile-picture'] }}');"></span>
+        <h5> {{ ::alert.user["user-firstname"] }}&nbsp;{{ ::alert.user["user-lastname"] }} </h5>
+        <p>{{ ::alert.message }}</p>
+      </div>
+    </div>

@@ -1,0 +1,77 @@
+<div class="row messages-container">
+  <div class="col-md-4 col-xs-12 sidebar nopadding">
+    <div class="list-group" id="side-messages">
+      <a ng-href="messages/{{thread.thread_id}}" class="list-group-item  thread-list" ng-repeat="thread in threads">
+        <h2 ng-if="!threads" style="color: #DDD;"ng-cloak>No Threads</h2>
+        <div class="row">
+          <div class="col-xs-2">
+            <div class="overlap-container">
+              <div class="profile-image image-one">
+                <img class="img-responsive" ng-src="https://www.blackmarketu.com/{{ $root.currentUser.profile_picture }}" />
+              </div>
+              <div class="profile-image image-two">
+                <img class="img-responsive" ng-src="https://www.blackmarketu.com/{{ thread.participants[0]['profile-picture'] }}" />
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-10">
+            <div class="row">
+              <div class="col-xs-7">
+                <h4 class="list-group-item-heading text-capitalize">{{ thread.participants[0]["user-name"]}}&nbsp;{{thread.participants[0]["user-lastname"]}}</h4>
+              </div>
+              <div class="col-xs-5">
+                <p class="list-group-item-text text-right">{{ thread.recent_message_time }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <p class="list-group-item-text text-overflow-elipsis">{{ thread.recent_message }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="message-view nopadding col-xs-5 sidebar nopadding" ui-view="">
+
+  </div>
+  <div class="posts-view nopadding col-xs-3 sidebar  nopadding" ui-view="posts" ng-if="inMessage.isIn">
+    <div ng-cloak class="liked-posts">
+      <h5 class="is-there-posts" ng-if="posts.length < 1" ng-cloak>No posts liked for this user</h5>
+      <h5 class="is-there-posts" ng-if="posts.length > 0" ng-cloak>Posts you like by this user</h5>
+      <div class="list-group" id="side-likes">
+        <h2 ng-if="!threads" style="color: #DDD;"ng-cloak>No Threads</h2>
+        <span ng-href="messages/{{thread.thread_id}}" class="list-group-item like-list" ng-repeat="post in posts">
+          <div class="row like-heading">
+            <div class="col-xs-1">
+              <div class="overlap-container">
+                <div class="profile-image img-small">
+                  <img class="img-responsive" ng-src="https://www.blackmarketu.com/{{ post.profile_picture }}" />
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-10">
+              <div class="row">
+                <div class="col-xs-12">
+                  <h4 class="list-group-item-heading text-capitalize text-small">{{ post.firstname }}&nbsp;{{post.lastname}}</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="row">
+                <div class="col-xs-3 somepadding">
+                  <img class="img-responsive" ng-src="{{ post.images[0].path }}" />
+                </div>
+                <div class="col-xs-8 somepadding">
+                  <p class="list-group-item-text text-overflow-elipsis text-md">{{ post.content }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </span>
+      </div>
+    </div>
+</div>

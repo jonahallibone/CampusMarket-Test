@@ -1,0 +1,242 @@
+<!--Add Modal-->
+<div ng-controller="addPostModal">
+    <script type="text/ng-template" id="addPostModal.html">
+      <div class="cover-loader animated fadeIn" ng-if="posting">
+        <div class="spinner-container">
+          <div class="spinner">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+          </div>
+        </div>
+      </div>
+      <div class="new-post clearfix">
+        <form role="form.form" name="form.asshole" id="form" ng-init="setFormScope(this)" class="clearfix" novalidate>
+          <div class="top-upload">
+            <h4 class="upload-title">CREATE NEW POST</h4>
+            <div class="add-image-box">
+              <button
+                ngf-drop="itemImages"
+                ngf-select="itemImages"
+                ngf-keep="true"
+                ng-model="itemImages"
+                ngf-multiple="true"
+                required=""
+                ngf-accept="'image/*'"
+                ngf-pattern="'.png,.jpg,.jpeg,!.mp4,!.gif,!.jog,!.psd'"
+                ngf-max-files="3"
+                ngf-max-size="10MB"
+                ngf-fix-orientation= "true"
+                ngf-capture="'other'"
+                class="upload-button">
+                <div class="i-size">
+                  <i class="fa fa-cloud-upload upload-i"></i><br />
+                </div>
+              Drag and drop images or click to browse</button>
+            </div>
+          </div>
+          <div class="item-thumb-list" ng-if="itemImages.length > 0">
+            <div class="delete" ng-repeat="image in itemImages">
+              <div class="delete-img">
+                <button class="btn btn-black btn-circle" ng-click="deleteImage($index)"><i class="fa fa-times"></i></button>
+              </div>
+              <img ngf-thumbnail="image" ngf-size="{width: 200, height: 200, quality: 1}" class="thumb">
+            </div>
+          </div>
+          <div class="modal-body clearfix">
+            <div class="form-body">
+              <div class="row inputs">
+                <div class="col-md-3">
+                  <label style="padding:1em 0;">Select Category:</label>
+                </div>
+                <div class="col-md-9">
+                  <ul id="icons">
+                    <li class="icon buysell" ng-click="activeCategory = 1" tooltips tooltip-template='Buy & Sell' tooltip-side="bottom" tooltip-size="small">
+
+                    </li>
+                    <li class="icon bulletin" ng-click="activeCategory = 2" tooltips tooltip-template='Bulletin Board' tooltip-side="bottom" tooltip-size="small">
+
+                    </li>
+                    <li class="icon rideshare" ng-click="activeCategory = 3" tooltips tooltip-template="Rideshare" tooltip-side="bottom" tooltip-size="small">
+
+                    </li>
+                    <li class="icon jobs"  ng-click="activeCategory = 4" tooltips tooltip-template='Jobs & Internships' tooltip-side="bottom" tooltip-size="small">
+
+                    </li>
+                    <li class="icon housing" ng-click="activeCategory = 5" tooltips tooltip-template="Housing" tooltip-side="bottom" tooltip-size="small">
+
+                    </li>
+                    <li class="icon lost" ng-click="activeCategory = 6" tooltips tooltip-template='Lost & Found' tooltip-side="bottom" tooltip-size="small">
+
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="row inputs" ng-if="activeCategory == 1">
+                <div class="col-xs-3">
+                  <label style="padding:1em 0;">Sub Category:</label>
+                </div>
+                <div class="col-xs-9">
+                  <select class="form-control inline-block" id="categories" ng-model="item.category" required>
+                    <option ng-repeat="category in categories | slice:1:9" ng-disabled="category.selectable" value="{{category.id}}">{{ category.name }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row inputs" ng-if="activeCategory == 2">
+                <div class="col-xs-3">
+                  <label style="padding:1em 0;">Sub Category:</label>
+                </div>
+                <div class="col-xs-9">
+                  <select class="form-control inline-block" id="categories" ng-model="item.category" required>
+                    <option ng-repeat="category in categories | slice:9:14" ng-disabled="category.selectable" value="{{category.id}}">{{ category.name }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row inputs" ng-if="activeCategory == 3">
+                <div class="col-xs-3">
+                  <label style="padding:1em 0;">Sub Category:</label>
+                </div>
+                <div class="col-xs-9">
+                  <select class="form-control inline-block" id="categories" ng-model="item.category" required>
+                    <option ng-repeat="category in categories | slice:14:16" ng-disabled="category.selectable" value="{{category.id}}">{{ category.name }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row inputs" ng-if="activeCategory == 4">
+                <div class="col-xs-3">
+                  <label style="padding:1em 0;">Sub Category:</label>
+                </div>
+                <div class="col-xs-9">
+                  <select class="form-control inline-block" id="categories" ng-model="item.category" required>
+                    <option ng-repeat="category in categories | slice:16:19" ng-disabled="category.selectable" value="{{category.id}}">{{ category.name }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row inputs" ng-if="activeCategory == 5">
+                <div class="col-xs-3">
+                  <label style="padding:1em 0;">Sub Category:</label>
+                </div>
+                <div class="col-xs-9">
+                  <select class="form-control inline-block" id="categories" ng-model="item.category" required>
+                    <option ng-repeat="category in categories | slice:19:22" ng-disabled="category.selectable" value="{{category.id}}">{{ category.name }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row inputs" ng-if="activeCategory == 6">
+                <div class="col-xs-3">
+                  <label style="padding:1em 0;">Sub Category:</label>
+                </div>
+                <div class="col-xs-9">
+                  <select class="form-control inline-block" id="categories" ng-model="item.category" required>
+                    <option ng-repeat="category in categories | slice:22:24" ng-disabled="category.selectable" value="{{category.id}}">{{ category.name }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row inputs">
+                <div class="col-md-8 col-xs-12">
+                  <input type="text" ng-model="item.name" class="item-input form-control" id="item-name" name="item-desc" placeholder="Item Title" required>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                  <input type="number" ng-model="item.price" class="item-input form-control" id="item-price" name="item-price" placeholder="Item Price" required>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <textarea placeholder="Item Description" ng-model="item.desc" class="item-input form-control" id="item-desc" name="item-desc" placeholder="Item Price" required></textarea>
+                </div>
+              </div>
+          </form>
+          <button type="button" class="btn btn-md btn-danger pull-left" ng-click="cancel()">Cancel</button>
+          <button type="button" class="btn btn-md btn-green pull-right" ng-disabled="form.asshole.$invalid" ng-click="uploadPost($files)">Post</button>
+        </div>
+      </div>
+    </div>
+    </script>
+      <!--End Modal-->
+</div>
+<div class="row content">
+  <div class="col-xs-12 col-md-2 sidebar nopadding">
+    <div id="side-menu">
+
+      <div class="new-post-button" ng-controller="addPostModal">
+        <button type="button" class="btn btn-round btn-green btn-lg create-post hvr-grow" ng-click="open()">New Post &nbsp <i class="fa fa-plus"></i></button>
+      </div>
+
+      <div class="list-container">
+        <a ng-href="/" class="title-heading" ng-click="setOpen(undefined)" ng-class="{'active-heading':openMenu === undefined}">Everything<i class="fa fa-chevron-down" ng-class="{'upside-down':openMenu === undefined}"></i></a>
+      </div>
+      <div class="list-container">
+        <a class="title-heading" ng-click="setOpen(1)" ng-class="{'active-heading':openMenu === 1}">Buy & Sell <i class="fa fa-chevron-down" ng-class="{'upside-down':openMenu === 1}"></i></a>
+        <ul class="categories" ng-class="{'menu-open':openMenu === 1}" >
+          <li ng-class="{'active-category' : activeMenu === 100}">
+            <a ng-href="category?id=0&id=1&id=2&id=3&id=4&id=5&id=6" ng-click="setActive(100)"><span class="glyphicon glyphicon-ok"></span>All</a>
+          </li>
+          <li ng-repeat="category in categories | slice:0:10" ng-if="category.id !== null" ng-class="{'active-category' : activeMenu === category.id}">
+            <a ng-href="/category?id={{ category.id }}" ng-click="setActive(category.id)"><span class="glyphicon glyphicon-ok"></span>{{ category.name }}</a>
+          </li>
+        </ul>
+      </div>
+      <div class="list-container">
+        <a class="title-heading" ng-click="setOpen(2)" ng-class="{'active-heading':openMenu === 2}">Bulletin Board<i class="fa fa-chevron-down" ng-class="{'upside-down':openMenu === 2}"></i></a>
+        <ul class="categories" ng-class="{'menu-open':openMenu === 2}">
+          <li ng-class="{'active-category' : activeMenu === 200}">
+            <a ng-href="category?id=7&id=8&id=9&id=10" ng-click="setActive(200)"><span class="glyphicon glyphicon-ok"></span>All</a>
+          </li>
+          <li ng-repeat="category in categories | slice:9:14" ng-if="category.id !== null" ng-class="{'active-category' : activeMenu === category.id}">
+            <a ng-href ="/category?id={{ category.id }}" ng-click="setActive(category.id)"><span class="glyphicon glyphicon-ok"></span>{{ category.name }}</a>
+          </li>
+        </ul>
+      </div>
+      <div class="list-container">
+        <a class="title-heading" ng-click="setOpen(3)" ng-class="{'active-heading':openMenu === 3}">RideShare <i class="fa fa-chevron-down" ng-class="{'upside-down':openMenu === 3}"></i></a>
+        <ul class="categories" ng-class="{'menu-open':openMenu === 3}">
+          <li ng-class="{'active-category' : activeMenu === 300}">
+            <a ng-href="category?id=11" ng-click="setActive(300)"><span class="glyphicon glyphicon-ok"></span>All</a>
+          </li>
+          <li ng-repeat="category in categories | slice:15:16" ng-if="category.id !== null" ng-class="{'active-category' : activeMenu === category.id}">
+            <a ng-href ="/category?id={{ category.id }}" ng-click="setActive(category.id)"><span class="glyphicon glyphicon-ok"></span>{{ category.name }}</a>
+          </li>
+        </ul>
+      </div>
+      <div class="list-container">
+        <a class="title-heading" ng-click="setOpen(4)" ng-class="{'active-heading':openMenu === 4}">Jobs/Internships <i class="fa fa-chevron-down" ng-class="{'upside-down':openMenu === 4}"></i></a>
+        <ul class="categories" ng-class="{'menu-open':openMenu === 4}">
+          <li ng-class="{'active-category' : activeMenu === 400}">
+            <a ng-href="category?id=12&id=13" ng-click="setActive(400)"><span class="glyphicon glyphicon-ok"></span>All</a>
+          </li>
+          <li ng-repeat="category in categories | slice:17:20" ng-if="category.id !== null" ng-class="{'active-category' : activeMenu === category.id}">
+            <a ng-href ="/category?id={{ category.id }}" ng-click="setActive(category.id)"><span class="glyphicon glyphicon-ok"></span>{{ category.name }}</a>
+          </li>
+        </ul>
+      </div>
+      <div class="list-container">
+        <a class="title-heading" ng-click="setOpen(5)" ng-class="{'active-heading':openMenu === 5}">Housing <i class="fa fa-chevron-down" ng-class="{'upside-down':openMenu === 5}"></i></a>
+        <ul class="categories" ng-class="{'menu-open':openMenu === 5}">
+          <li ng-class="{'active-category' : activeMenu === 500}">
+            <a ng-href="category?id=14&id=15" ng-click="setActive(500)"><span class="glyphicon glyphicon-ok"></span>All</a>
+          </li>
+          <li ng-repeat="category in categories | slice:20:22" ng-if="category.id !== null" ng-class="{'active-category' : activeMenu === category.id}">
+            <a ng-href ="/category?id={{ category.id }}" ng-click="setActive(category.id)"><span class="glyphicon glyphicon-ok"></span>{{ category.name }}</a>
+          </li>
+        </ul>
+      </div>
+      <div class="list-container">
+        <a class="title-heading" ng-click="setOpen(6)" ng-class="{'active-heading':openMenu === 6}">Lost & Found <i class="fa fa-chevron-down" ng-class="{'upside-down':openMenu === 6}"></i></a>
+        <ul class="categories" ng-class="{'menu-open':openMenu === 6}">
+          <li ng-class="{'active-category' : activeMenu === 600}">
+            <a ng-href="category?id=16" ng-click="setActive(600)"><span class="glyphicon glyphicon-ok"></span>All</a>
+          </li>
+          <li ng-repeat="category in categories | slice:23:24" ng-if="category.id !== null" ng-class="{'active-category' : activeMenu === category.id}">
+            <a ng-href ="/category?id={{ category.id }}" ng-click="setActive(category.id)"><span class="glyphicon glyphicon-ok"></span>{{ category.name }}</a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+  <!--Content-->
+  <div class="col-xs-12 col-md-10 pull-right" ui-view="">
+    <div style='clear: both;'></div>
+  </div>
+  </div>
+
+</div>

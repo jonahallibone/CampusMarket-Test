@@ -1,0 +1,164 @@
+<!-- report posts -->
+<div ng-controller="reportPostModal">
+  <script type="text/ng-template" id="reportPostModal.html">
+    <div class="modal-header">
+      <h4>Report post</h4>
+    </div>
+    <div class="modal-body">
+      <form role="form.form" name="form.report" id="reportForm" ng-init="setFormScope(this)" class="clearfix" ng-model="report" novalidate>
+        <h5>Why are you reporting this post?</h5>
+        <div class="radio">
+          <label><input type="radio" name="optradio"  ng-model="report.reason" ng-value="'porn'" required>Pornography / Nudity</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="optradio"  ng-model="report.reason" ng-value="'substances'" required>Illegal Substances</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="optradio"  ng-model="report.reason" ng-value="'notincollege'" required>User does not attend college</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="optradio"  ng-model="report.reason" ng-value="'spam'" required>Spam</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="optradio" ng-model="report.reason" ng-value="'harassment'" required>Harassment</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="optradio" ng-model="report.reason" ng-value="'other'" required>Other</label>
+        </div>
+        <textarea name="other" id="other" ng-if="report.reason == 'other'" ng-disabled="report.reason != 'other'" ng-model="report.oreason" placeholder="Other reason" style="display:block;width:100%; height: 4em; resize: none;" required></textarea>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-danger pull-left" type="button" ng-click="cancel()">Cancel</button>
+      <button type="button" class="btn btn-primary pull-right" ng-disabled="form.report.$invalid" ng-click="uploadReport()">Post</button>
+    </div>
+  </script>
+</div>
+
+
+<!-- edit posts -->
+<div ng-controller="editPostModal">
+  <script type="text/ng-template" id="editPostModal.html">
+    <div class="cover-loader animated fadeIn" ng-if="posting">
+      <div class="spinner-container">
+        <div class="spinner">
+          <div class="double-bounce1"></div>
+          <div class="double-bounce2"></div>
+        </div>
+      </div>
+    </div>
+    <div class="new-post clearfix">
+      <form role="form.form" name="form.asshole" id="form" ng-init="setFormScope(this)" class="clearfix" novalidate>
+        <div class="top-upload">
+          <h4 class="upload-title">EDIT POST</h4>
+          <div style="display:inline-block; width: 25%;padding: 1em;" ng-repeat="image in post.images">
+            <img ng-src="{{ image.path }}" class="img-responsive" />
+          </div>
+        </div>
+        <div class="modal-body clearfix">
+          <div class="form-body">
+            <input type="text" ng-model="item.name" class="item-input form-control" id="item-name" name="item-desc" placeholder="Item Title" required>
+            <div class="row inputs">
+              <div class="col-md-8 col-xs-12">
+                <!--<label for="categories">Choose Category</label>-->
+                <select class="form-control inline-block" id="categories" disabled="true">
+                  <option selected="selected">{{ post.category }}</option>
+                </select>
+              </div>
+              <div class="col-md-4 col-xs-12">
+                <input type="number" ng-model="item.price" class="item-input form-control" id="item-price" name="item-price" placeholder="Item Price" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <textarea placeholder="Item Description" ng-model="item.desc" class="item-input form-control" id="item-desc" name="item-desc" placeholder="Item Price" required>{{ post.content }}</textarea>
+              </div>
+            </div>
+        </form>
+        <button class="btn btn-danger pull-left"  type="button" ng-click="cancel()">Cancel</button>
+        <button type="button" class="btn btn-primary btn-green pull-right" ng-disabled="form.asshole.$invalid" ng-click="uploadPost()">Post</button>
+      </div>
+    </div>
+  </div>
+  </script>
+</div>
+
+
+
+<!----->
+
+
+<article class="contents"
+infinite-scroll="loadMorePosts()"
+infinite-scroll-distance="1"
+masonry
+reload-on-resize
+preserve-order
+reload-on-show
+masonry-options="{
+  columnWidth: $grid.find('.post-card')[0],
+  itemSelector: '.post-card',
+  gutter: '.gutter-sizer',
+  percentPosition: true,
+  transitionDuration: 0.4
+}">
+<h1 ng-if="posts.length<1" style="color: #999" class="text-center" ng-cloak>No posts</h1>
+  <!--gutter size for masonry-->
+  <div class="gutter-sizer"></div>
+  <!--end gutter-->
+
+  <div masonry-brick class="post-card" images-loaded="imgLoadedEvents" ng-repeat="post in posts track by $index"  emit-last-repeater-element>
+    <!-- Loader-->
+    <div class="cover-loader animated fadeIn" ng-if="post.deleting">
+      <div class="spinner-container">
+        <div class="spinner">
+          <div class="double-bounce1"></div>
+          <div class="double-bounce2"></div>
+        </div>
+      </div>
+    </div>
+    <div class="top-info">
+      <div class="profile-image" style="background-image:url( {{ addRoute(post.profile_picture) }} ); background-size: cover;">
+      </div>
+      <div class="user-info">
+        <a ng-href="{{'profile/'+post.user_id }}" class="post-username">{{ post.firstname}}&nbsp;{{ post.lastname }}</a>
+        <a ng-href="{{'category?id='+post.category_id }}" class="post-category">{{ post.category}}</a>
+      </div>
+    </div>
+    <div class="image-preview">
+      <div class="main-img">
+        <h1 class="price-title price-abs"><span class="price">${{post.price}}</span></h1>
+        <img ng-src="{{ post.images[0].path }}" />
+      </div>
+      <div class="img-thumbs" ng-if="post.images.length > 1">
+        <ul class="thumb-ul">
+          <li ng-repeat="image in post.images">
+            <a ng-href="{{ image.path }}"><img ng-src="{{ image.path }}" /></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="post-content">
+
+      <div class="wrap">
+        <span class="title-separator">
+          <h1 class="post-title item-title">{{post.title}}</h1>
+        </span>
+        <p class="description" ng-bind-html="post.content"></p>
+      </div>
+    </div>
+    <div class="row icon-row">
+      <div class="col-xs-6">
+        <i tooltips tooltip-template="Report" tooltip-side="bottom" tooltip-size="small"role="button" ng-controller="reportPostModal" ng-click="openReport('sm', post, posts)" class="fa fa-exclamation-circle icons report" ng-if="$root.currentUserId !== post.user_id"></i>
+        <i tooltips tooltip-template="Delete" tooltip-side="bottom" tooltip-size="small" role="button" delete-post the-post="post" the-posts="posts" class="fa fa-remove icons delete" ng-if="$root.currentUserId === post.user_id"></i>
+        <i tooltips tooltip-template="Edit" tooltip-side="bottom" tooltip-size="small"role="button" ng-controller="editPostModal" ng-click="openEdit(post)" class="fa fa-gear icons edit" ng-if="$root.currentUserId === post.user_id"></i>
+        <i tooltips tooltip-template="Sold" tooltip-side="bottom" tooltip-size="small"role="button" mark-as-sold the-post="post" ng-class="{'is-sold':post.sold}" the-posts="posts" class="fa fa-money icons sold" ng-if="$root.currentUserId === post.user_id"></i>
+      </div>
+      <div class="col-xs-6 text-right">
+        <i tooltips tooltip-template="Like" tooltip-side="bottom" tooltip-size="small" role="button" like-post the-post="post" the-posts="posts"></i>
+        <span class="like-count" ng-if="post.likes.likes" ng-class="{'empty':post.likes.likes<1 , 'is-liked':post.likes.isLiked , 'is-not-liked':!post.likes.isLiked}">{{ post.likes.likes }}</span>
+        <i  tooltips tooltip-template="Message" tooltip-side="bottom" tooltip-size="small" role="button" message-user the-post="post" the-posts="posts" ng-if='$root.currentUserId !== post.user_id'></i>
+      </div>
+    </div>
+  </div>
+</article>

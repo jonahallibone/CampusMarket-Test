@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="css/forgot.css" />
+
+
+  <div class="card card-block login-card" style="position:relative;">
+    <div class="loader" ng-if="loading">
+      <div class="sk-folding-cube">
+        <div class="sk-cube1 sk-cube"></div>
+        <div class="sk-cube2 sk-cube"></div>
+        <div class="sk-cube4 sk-cube"></div>
+        <div class="sk-cube3 sk-cube"></div>
+      </div>
+    </div>
+
+    <h1 class="forgot-title">Forgot Username / Password</h1>
+    <form role="form"  name="recoverform" email-edu ng-submit="recoverform.$valid && sendRecoveryEmail(email)" novalidate ng-if="notVerified">
+    <div class="form-group">
+      <label for="useremail">Username or Email</label>
+      <input type="text" class="form-control" ng-model="email" id="useremail" placeholder="Bob Wright or bob.wright@example.edu" required>
+      <span ng-if="error" style="color: #F00">There seems to be a problem. Are you sure you have an account? </span>
+    </div>
+    <div class="login-bottom-container">
+      <input type="submit" value="Recover" class="btn btn-green btn-lg btn-block" style="padding: .8em .5em;" />
+      <div class="text-center" style="margin-top:1em;">
+        <a ui-sref="signupState" class="sign-up">Sign up for an account</a>
+      </div>
+    </div>
+  </form>
+  <div class="row" ng-if="!notVerified">
+    <div class="col-xs-12">
+      <h2>Please check your email for recovery link!</h2>
+    </div>
+  </div>
+</div>

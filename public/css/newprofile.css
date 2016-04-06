@@ -1,0 +1,383 @@
+/**Defaults**/
+#side-menu {
+  background-color: #34495E !important;
+  color: #3498db;
+}
+
+#side-menu .stats {
+  color: #FFF !important;
+  text-align: center;
+  box-sizing: border-box;
+  background-color: #FFF;
+  padding: 1em 0 !important;
+}
+
+#side-menu .stats h2.statistic {
+  font-size: 2em;
+  font-weight: 500;
+  display: block;
+  color: #3498db !important;
+  margin-top: 0 !important;
+  padding: 0;
+  margin: 0 0 .5em 0;
+}
+
+#side-menu .stats h3.statistic-title {
+  font-weight: 600;
+  font-size: 1em;
+  color: #34495e !important;
+  padding: 0;
+  margin: 0;
+}
+
+.row.profile-posts {
+  padding: 1em;
+}
+
+.profile-info {
+  position: relative;
+  overflow: hidden;
+  min-height: 300px;
+}
+
+.profile-info:after {
+  content: ' ';
+   display: block;
+   position: absolute;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   z-index: 1;
+   opacity: 0.35;
+   background-image: url('../images/bg-2-min.png');
+   background-repeat: no-repeat;
+   background-position: 50% 0;
+   -ms-background-size: cover;
+   -o-background-size: cover;
+   -moz-background-size: cover;
+   -webkit-background-size: cover;
+   background-size: cover;
+}
+
+.profile-area {
+  position: relative;
+  z-index: 5;
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, .8);
+}
+
+.profile-picture {
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.profile-picture .change-pro-pic {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,0.5);
+  color: #FFF;
+  opacity: 0;
+  transition: 0.2s linear all;
+}
+
+.profile-picture .change-pro-pic span.change-banner {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 15%;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.85em;
+  color: #FFF;
+}
+
+.profile-picture .change-pro-pic .change-cam {
+  font-size: 2em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-80%);
+}
+
+
+.profile-picture .change-pro-pic:hover {
+  opacity: 1;
+  display: block;
+}
+
+#bio {
+  padding: 1em;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+#bio h5 {
+  font-weight: 600;
+  color: #FFF;
+  text-transform: uppercase;
+}
+
+#bio h5:hover {
+  background-color: transparent !important;
+}
+
+#bio span.edit-bio {
+  color: #ecf0f1;
+}
+
+#bio textarea.edit-bio {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+  resize: none;
+  color: #FFF;
+  padding: 0;
+  transition: 0.2s linear all;
+  padding-top: .25em;
+}
+
+textarea.edit-bio:focus {
+  background-color: #537291 !important;
+}
+
+.profile-header {
+  background-color: #ECF0F1;
+}
+
+#tradelist {
+  width: inherit;
+  box-sizing: border-box;
+  padding-bottom: 2em;
+  min-height: 100%;
+  padding-top: 1em;
+  background-color: #2c3e50;
+}
+
+.angular-google-map-container {
+  min-height: 331px;
+  height: 100%;
+}
+
+#tradelist h4.trade-title {
+  padding: .75em .8em;
+  margin: 0;
+  font-weight: 600;
+  font-size: 1em;
+  text-transform: uppercase;
+  color: #FFF;
+  cursor: pointer;
+  transition: 0.5s all ease;
+  background-color: #34495e;
+  -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.05);
+}
+
+.trade-bar {
+  background-color: transparent;
+  overflow-y:scroll;
+}
+
+#tradelist ul.list {
+  list-style: none;
+  padding: 0 0;
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+#tradelist ul.list li {
+  font-size: .95em;
+  padding: .5em .5em;
+  color: #FFF;
+  font-weight: 500;
+}
+
+#tradelist i:hover {
+  color: #c0392b;
+  cursor: pointer;
+}
+
+#tradelist ul.list li.add {
+  padding: .75em .8em;
+  margin: 0;
+  font-weight: 600;
+  font-size: 1em;
+  text-transform: uppercase;
+  color: #FFF;
+  cursor: pointer;
+  transition: 0.5s all ease;
+  background-color: #34495e;
+}
+
+#tradelist input.new-item {
+  background-color: #FFF;
+  border-radius: 4px;
+  padding: .5em .25em;
+  border-style: solid;
+  border: none;
+  width: 100%;
+  color: #34495e;
+}
+
+#tradelist .btn-blue {
+  background-color: #2c3e50;
+  color: #FFF;
+  margin-top: .5em;
+  font-weight: 600;
+  -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+#square-area h4.profile-user-name:hover {
+  background-color: transparent !important;
+}
+/*********************/
+/***Media Queries****/
+/*********************/
+
+/*Phones, the big deal*/
+@media(max-width:767px) {
+  #side-menu {
+    position: relative;
+    height: inherit;
+    padding-bottom: 0;
+  }
+
+  .profile-area:before {
+    margin-top: 0;
+  }
+
+
+  #square-area {
+    padding-bottom: 1em;
+    position: relative;
+    background-color: transparent;
+  }
+
+  .information-container {
+    position: relative;;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 100%;
+    margin-top: 3em;
+  }
+
+  #square-area .profile-picture {
+    height: 6em;
+    width: 6em;
+    border-radius: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    position: relative;
+    top: 1em;
+    border: 3px solid #FFF;
+    overflow: hidden;
+  }
+
+  #square-area h4.profile-user-name {
+    display: block;
+    text-align: center;
+    font: 1.5em;
+  }
+
+  .post-card {
+    width: 100%;
+  }
+
+}
+/*Tablets and up*/
+@media(min-width:768px){
+  #side-menu,
+  #tradelist {
+    position: relative;
+    height: inherit;
+    padding-bottom: 0;
+  }
+
+  .profile-area:before {
+    margin-top: 0;
+  }
+
+  #square-area {
+    padding-bottom: 1em;
+    position: relative;
+    background-color: transparent;
+  }
+
+  .information-container {
+    position: relative;;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 100%;
+    margin-top: 3em;
+  }
+
+  #square-area .profile-picture {
+    height: 8em;
+    width: 8em;
+    border-radius: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    position: relative;
+    top: 1em;
+    border: 3px solid #FFF;
+    overflow: hidden;
+  }
+
+  #square-area h4.profile-user-name {
+    display: block;
+    text-align: center;
+    margin: .5em 0;
+    font: 1.5em;
+  }
+
+  .post-card {
+    width: 48%;
+  }
+
+  .gutter-sizer {
+    width: 2%;
+  }
+
+}
+/*Mid size and up*/
+@media(min-width:992px){
+  #tradelist {
+    position: fixed;
+  }
+  #square-area .profile-picture {
+    margin-bottom: 3em;
+  }
+
+  .post-card {
+    width: 32%;
+  }
+
+}
+/*Large and up*/
+@media(min-width:1200px){
+  #square-area h4.profile-user-name {
+    font-size: 1em;
+    margin: .5em 0;
+    padding: 0 .5em;
+  }
+
+  .post-card {
+    width: 24%;
+  }
+
+  .gutter-sizer {
+    width: 1%;
+  }
+
+  .information-container {
+    margin-top: 1em;
+    bottom: .5em;
+  }
+}

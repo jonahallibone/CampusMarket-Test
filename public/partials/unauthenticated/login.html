@@ -1,0 +1,31 @@
+<div class="login-fill">
+</div>
+
+  <!--Sign up alert-->
+
+
+  <div class="card card-block login-card">
+    <div class="floating-alert green-alert" ng-if="loginMessage">
+      <span><i class="glyphicon glyphicon-ok"></i>&nbsp;{{ loginMessage }}</span>
+    </div>
+    <h1>Login</h1>
+    <form role="form">
+    <div class="form-group">
+      <label for="username">Email or Username</label>
+      <input type="text" class="form-control" ng-model="user.email" id="username" auto-fill-sync placeholder="Email or Username" required edu-email-validate>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password"  auto-fill-sync ng-model="user.password" placeholder="Password" required>
+      <span class="error" ng-if="loginAlert" style="color:#c0392b; font-size: .85em;">{{ loginAlert }}</span>
+    </div>
+    <div class="login-bottom-container">
+      <button type="submit" class="btn btn-green btn-lg btn-block" ng-click="login()" style="padding: .8em .5em;">Login</button>
+      <div class="text-center" style="margin-top:1em;">
+        <a ui-sref="signupState" class="sign-up">Sign up for an account</a>
+        <a ui-sref="forgotState" class="forgot-pwd">Forgot your password?</a>
+        <a ui-sref="resendState" class="forgot-pwd">Resend vertification email?</a>
+      </div>
+    </div>
+  </form>
+</div>

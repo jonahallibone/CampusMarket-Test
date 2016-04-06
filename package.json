@@ -1,0 +1,24 @@
+{
+  "name": "campusmarket",
+  "version": "1.0.0",
+  "description": "package.json for BMU",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonahallibone/CampusMarket.git"
+  },
+  {
+ "devDependencies": {
+   "gulp": "^3.8.8",
+   "laravel-elixir": "*"
+ },
+  "author": "Jonah Allibone",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jonahallibone/CampusMarket/issues"
+  },
+  "homepage": "https://github.com/jonahallibone/CampusMarket#readme"
+}

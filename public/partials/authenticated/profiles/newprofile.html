@@ -1,0 +1,165 @@
+<link href="css/newprofile.css" rel="stylesheet" />
+
+<!--change pro pic-->
+<div ng-controller="changeProPic">
+  <script type="text/ng-template" id="changeProPic.html">
+    <div class="cover-loader animated fadeIn" ng-if="posting">
+      <div class="spinner-container">
+        <div class="spinner">
+          <div class="double-bounce1"></div>
+          <div class="double-bounce2"></div>
+        </div>
+      </div>
+    </div>
+    <form role="form" name="report" novalidate ng-submit="uploadPic(croppedDataUrl)">
+      <div class="modal-header">
+        <h4>Change Profile Picture</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group text-center">
+          <span ng-show="imageError" style="color: #c0392b; padding-bottom: 1em; font-weight: bold;">Please choose a profile picture</span>
+          <div class="profile-image">
+            <label for="file">Please upload a profile image</label>
+            <br />
+            <label for="file" class="btn btn-green btn-lg">Choose Profile Picture</label>
+            <div class="profile-preview">
+              <img-crop image="picFile  | ngfDataUrl"
+                  result-image="croppedDataUrl" ng-init="croppedDataUrl=''">
+                </img-crop>
+            </div>
+            <input type="file"
+              id="file"
+              required
+              ngf-select="picFile"
+              ngf-drop="picFile"
+              ng-model="picFile"
+              name="file"
+              accept="image/*"
+              ngf-max-size="10MB"
+              ngf-model-invalid="errorFiles"
+              style="display:none;"
+              ngf-accept="'image/*'"
+              ngf-pattern="'.png,.jpg,.jpeg,!.mp4,!.gif,!.jog,!.psd'"
+              ngf-max-files="1"
+              ngf-max-size="10MB"
+              ngf-fix-orientation="true"
+              ngf-capture="'other'"
+              >
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger btn-md pull-left" type="button" ng-click="cancel()">Cancel</button>
+        <input type="submit" class="btn btn-green btn-md pull-right" value="Upload" ng-disabled="report.$invalid" ng-click="submitted = true">
+      </div>
+    </form>
+  </script>
+</div>
+
+<div class="row clearfix">
+  <div class="col-xs-12 col-sm-2 nopadding trade-bar hidden-sm hidden-xs">
+    <div id="tradelist" ng-init="newItem = {}">
+      <h4 class="trade-title" style="padding-top: 1em;margin-top:0;" ng-if="$root.currentUserId == currentUser.id">USER SETTINGS</h4>
+      <ul class="list" ng-if="$root.currentUserId == currentUser.id">
+        <li>
+          Change Password
+        </li>
+      </ul>
+      <h4 class="trade-title">TRADELIST</h4>
+      <ul class="list">
+        <li ng-repeat="item in tradelist track by $index">
+          {{ item.body }}
+          <i class="fa fa-remove pull-right" role="button" ng-click="deleteFromTradeList(item)" ng-if="$root.currentUserId == currentUser.id"></i>
+        </li>
+        <li ng-if="$root.currentUserId == currentUser.id" class="add">
+          <label for="new-item">Input new item:</label>
+          <input type="text"  ng-model="newItem.item" class="new-item" id="new-item"/>
+          <button role="button" class="btn btn-md btn-block btn-blue" ng-click="addToTradeList()">Add Item to Tradelist</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-xs-12 col-md-10 nopadding">
+    <div class="row nopadding">
+      <div class="col-xs-12 profile-header nopadding">
+        <div id="side-menu">
+          <div class="row nopadding"  id="bio">
+            <div class="col-xs-12 col-md-6 profile-info">
+              <div class="profile-area">
+                <div id="square-area">
+                  <div class="profile-picture" style="background-image:url({{ addRoute(currentUser.profile_picture) }}); background-size:cover;">
+                    <div ng-if="$root.currentUserId == currentUser.id" class="change-pro-pic" ng-controller="changeProPic" ng-click="open(currentUser)" ng-cloak>
+                      <i class="glyphicon glyphicon-camera change-cam" ng-cloak></i>
+                      <span class="change-banner">Change</span>
+                    </div>
+                  </div>
+                  <div class="information-container">
+                    <h4 class="profile-user-name">
+                       {{currentUser.firstName}}&nbsp;{{currentUser.lastname}}
+                    </h4>
+                    <h4 class="profile-user-name">
+                       {{ currentUser.school }} class of {{currentUser.grad_class}}
+                    </h4>
+                  </div>
+                </div>
+                <h5>BIO<span class="edit-bio" ng-if="$root.currentUserId == currentUser.id"> - CLICK TO EDIT</span></h5>
+                <textarea type="textarea" role="textarea" name="bio" ng-model="currentUser.bio" id="bio" class="edit-bio" placeholder="Your Bio Here" ng-cloak></textarea>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-6 hidden-sm hidden-xs nopadding">
+              <div ng-if="showMap">
+              <ui-gmap-google-map center='map.center' zoom='map.zoom' options='{draggable:false, mapTypeControl:false, zoomControl: false, scrollwheel: false}'>
+                <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
+                </ui-gmap-marker>
+              </ui-gmap-google-map>
+            </div>
+            </div>
+          </div>
+          <div class="row stats nopadding">
+            <div class="col-xs-4">
+              <h2 class="statistic first">{{ currentUser.for_sale }}</h2>
+              <h3 class="statistic-title">Posts for sale</h4>
+            </div>
+            <div class="col-xs-4">
+              <h2 class="statistic">{{ currentUser.sold }}</h2>
+              <h3 class="statistic-title">Sold Items</h4>
+            </div>
+            <div class="col-xs-4">
+              <h2 class="statistic">{{ currentUser.likes }}</h2>
+              <h3 class="statistic-title">Likes On Posts</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 nopadding trade-bar visible-xs-block visible-sm-block">
+      <div id="tradelist" ng-init="newItem = {}">
+        <h4 class="trade-title" style="padding-top: 1em;margin-top:0;" ng-if="$root.currentUserId == currentUser.id" ng-cloak>USER SETTINGS</h4>
+        <ul class="list" ng-if="$root.currentUserId == currentUser.id" ng-cloak>
+          <li>
+            Change Password
+          </li>
+        </ul>
+        <h4 class="trade-title">TRADELIST</h4>
+        <ul class="list">
+          <li ng-repeat="item in tradelist track by $index">
+            {{ item.body }}
+            <i class="fa fa-remove pull-right" role="button" ng-click="deleteFromTradeList(item)" ng-if="$root.currentUserId == currentUser.id"></i>
+          </li>
+          <li ng-if="$root.currentUserId == currentUser.id" class="add">
+            <label for="new-item">Input new item:</label>
+            <input type="text"  ng-model="newItem.item" class="new-item" id="new-item"/>
+            <button role="button" class="btn btn-md btn-block btn-blue" ng-click="addToTradeList()">Add Item to Tradelist</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <div class="row profile-posts">
+        <div ui-view="posts">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

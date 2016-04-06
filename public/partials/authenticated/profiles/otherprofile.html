@@ -1,0 +1,56 @@
+<link href="css/newprofile.css" rel="stylesheet">
+<div class="row clearfix">
+  <div class="col-xs-12 sidebar nopadding">
+    <div id="side-menu">
+      <div class="profile-area">
+        <div id="square-area">
+          <div class="profile-picture" style="background-image:url({{ addRoute(otherUser.profile_picture) }}); background-size:cover;"></div>
+          <div class="information-container">
+            <h4 class="profile-user-name">
+               {{otherUser.firstName}}&nbsp;{{otherUser.lastname}}
+            </h4>
+            <h4 class="profile-user-name">
+               {{ otherUser.school }} class of {{otherUser.grad_class}}
+            </h4>
+          </div>
+        </div>
+      </div>
+      <div class="row nopadding"  id="bio">
+        <div class="col-xs-12">
+          <span id="bio" class="edit-bio" placeholder="Your Bio Here" ng-cloak>{{ otherUser.bio }}</textarea>
+        </div>
+      </div>
+      <div class="row stats nopadding">
+        <div class="col-xs-4">
+          <h2 class="statistic first">{{ otherUser.for_sale }}</h2>
+          <h3 class="statistic-title">Posts for sale</h4>
+        </div>
+        <div class="col-xs-4">
+          <h2 class="statistic">{{ otherUser.sold }}</h2>
+          <h3 class="statistic-title">Sold Items</h4>
+        </div>
+        <div class="col-xs-4">
+          <h2 class="statistic">{{ otherUser.likes }}</h2>
+          <h3 class="statistic-title">Likes On Posts</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-md-2 nopadding trade-bar">
+    <div id="tradelist">
+      <h4 class="trade-title">TRADELIST</h4>
+      <ul class="list">
+        <li ng-repeat="item in tradelist track by $index">
+          {{ item.body }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-xs-12 col-md-10">
+    <div class="row profile-posts">
+      <div ui-view="posts">
+
+      </div>
+    </div>
+  </div>
+</div>

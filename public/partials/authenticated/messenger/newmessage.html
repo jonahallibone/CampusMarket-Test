@@ -1,0 +1,24 @@
+  <div class="message-scroller">
+    <div class="new-hover-message">
+      <h3>New Message to <span class="name-highlight">{{ toUser.firstName }}&nbsp;{{ toUser.lastname }}</span></h3>
+    </div>
+    <div class="message-container">
+      <ul class="list-group">
+        <li class="list-group-item no-borders" ng-repeat="message in messages">
+          <div class="message-profile-img">
+            <img class="img-circle img-responsive" ng-src="https://www.blackmarketu.com/{{ message.user['profile-picture'] }}">
+          </div>
+          <h5 class="inline-block-img name"> {{ message.user["user-firstname"]}}&nbsp;{{ message.user["user-lastname"]}} </h5>
+          <p class="list-group-item-text padded-left">
+            {{ message.message }}
+          </p>
+        </li>
+      </ul>
+    </div>
+    <div class="bottom-container">
+      <form role="form" name="form">
+        <textarea autofocus placeholder="Enter message here..." ng-model="newMessage.message"></textarea>
+        <button type="button" role="button" ng-click="sendMessage()" class="btn btn-md btn-primary">Send Message</button>
+      </form>
+    </div>
+  </div>

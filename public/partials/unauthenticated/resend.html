@@ -1,0 +1,22 @@
+<link rel="stylesheet" href="css/forgot.css" />
+
+
+  <!--Sign up alert-->
+
+
+  <div class="card card-block login-card">
+    <h1 class="forgot-title">Resend verify email</h1>
+    <form role="form" ng-submit="resend()">
+    <div class="form-group">
+      <label for="useremail">Email</label>
+      <input ng-pattern="/(\.edu(\.[a-zA-Z]+)?|\.ac\.[a-zA-Z]+)$/i" type="text" class="form-control" ng-model="user.email" id="useremail" placeholder="bob.wright@example.edu" required>
+    </div>
+    <div class="login-bottom-container">
+      <button type="submit" class="btn btn-green btn-lg btn-block" style="padding: .8em .5em;">Proceed</button>
+      <label class="error" style="color:#F00; padding: 1em 0;" ng-if="error">Email does not exist or is already verified</label>
+      <div class="text-center" style="margin-top:1em;">
+        <a ui-sref="signupState" class="sign-up">Sign up for an account</a>
+      </div>
+    </div>
+  </form>
+</div>

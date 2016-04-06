@@ -1,0 +1,42 @@
+<article class="contents"
+infinite-scroll="loadMorePosts()"
+infinite-scroll-distance="0"
+masonry reload-on-resize
+reload-on-show load-images="true"
+masonry-options="{
+  columnWidth: $grid.find('.post-card')[0],
+  itemSelector: '.post-card',
+  gutter: '.gutter-sizer',
+  percentPosition: true,
+  transitionDuration: 0
+}">
+  <!--gutter size for masonry-->
+  <div class="gutter-sizer"></div>
+  <!--end gutter-->
+  <div masonry-brick class="post-card" ng-repeat="post in posts">
+    <div class="item-slider">
+      <uib-carousel interval="myInterval" no-wrap="noWrapSlides">
+        <uib-slide ng-repeat="image in post.images" active="slide.active" index="slide.id">
+          <img ng-src="{{addRoute(image.path)}}" style="margin:auto;">
+        </uib-slide>
+      </uib-carousel>
+    </div>
+    <div class="post-content">
+      <div class="top-info">
+        <div class="profile-image" style="background-image:url( {{ addRoute(post.profile_picture) }} ); background-size: cover;">
+        </div>
+        <span><div class="glyphicon glyphicon-user">&nbsp;</div></span><a ng-href="{{'profile/'+post.user_id }}" class="post-username">{{ post.firstname}}&nbsp;{{ post.lastname }}</a>
+        <br>
+        <span><div class="glyphicon glyphicon-tag">&nbsp;</div></span><a ng-href="{{'category/'+post.category_id }}" class="post-username">{{ post.category}}</a>
+      </div>
+      <div class="wrap">
+        <h1 class="post-title">{{post.title}} - <span class="price">{{post.price}}</span></h1>
+        <p class="description">
+          {{post.content}}
+        </p>
+      </div>
+      <button ng-hide="currentUserId == post.user_id" type="button" class="btn btn-green btn-lg btn-block" ng-click="privateMessenger(post.user_id)">Message Seller</button>
+      <button ng-hide="currentUserId !== post.user_id" type="button" class="btn btn-danger btn-lg btn-block" ng-click="deletePost(post.id)">Delete</button>
+    </div>
+  </div>
+</article>

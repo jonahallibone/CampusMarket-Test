@@ -1,0 +1,141 @@
+
+.logo1 {
+    width: 15%;
+    margin-left: 43%
+
+}
+
+.logo2 img {
+    width: 10%;
+}
+.logo3 img {
+    width: 10%;
+}
+
+
+p {
+	line-height: 30px;
+	font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: #333333;
+	text-transform: uppercase;
+	font-weight: 700;
+}
+
+a {
+	color: #3498db;
+
+}
+
+a:hover, a:focus{
+	color: #308ac6;
+}
+
+
+
+.jumbotron {
+	background: #2c3e50 url(../assets/images/bg-frontpage-min.png) no-repeat;
+	background-size: cover;
+	height:100vh;
+	padding: 30px 0;
+	margin:0;
+}
+
+.jumbotron h1{
+	color: #fff;
+    font-size: 500%;
+	margin: 0 0 10px 0;
+    margin-top: 2%;
+}
+
+.jumbotron h1 span{
+	color: #bcdf86;
+	font-weight: 700;
+}
+
+.jumbotron h3{
+	color: #bcdf86;
+	font-size: 20px;
+	line-height:30px;
+	font-weight: 400;
+	text-transform: none;
+	margin: 0 0 60px 0;
+}
+
+.jumbotron h3 span{
+	color: #bcdf86;
+}
+
+.jumbotron .btn-primary{
+
+	border-radius: 5px;
+	border: 1.5px solid #fff;
+	background: rgba(188, 223, 134, 0.15);
+	text-transform: uppercase;
+	color: #fff;
+	font-size: 20px;
+	padding: 12px 30px;
+}
+
+.jumbotron .btn-primary:hover{
+	background: rgba(255, 255, 255, 0.1);
+}
+
+.jumbotron {
+	border-radius: 0 !important;
+  margin: 0 -15px;
+}
+
+
+
+
+.services {
+	padding: 60px 0;
+	border-bottom: 1px solid #e3e3e3;
+}
+
+.services h4{
+	margin-bottom: 30px;
+}
+
+
+footer{
+	padding: 60px 0;
+}
+
+.copyright small{
+	font-size: 13px;
+	color: #95a5a6;
+}
+
+
+
+@media(max-width:1200px) {
+    .jumbotron { height: 50vh; }
+
+}
+
+
+@media(min-width:768px){
+
+
+@media(min-width:992px){
+
+	.jumbotron h3{ font-size: 24px;  }
+	.services-web, .services-dev {margin-bottom: 0; }
+    .copyright{ text-align:left; }
+
+}
+
+@media(min-width:1200px){
+	.jumbotron{ padding: 0px 0 180px 0;  }
+
+	.jumbotron h1{ padding-top:180px; }
+	.jumbotron h3{ margin-bottom: 120px; }
+	.services{padding: 0;}
+	.services .col-md-4 {padding: 60px 0;}
+	.services-dev .col-md-4{ border-right: 1px solid #e3e3e3; border-left: 1px solid #e3e3e3;}
+
+}
