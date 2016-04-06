@@ -11,7 +11,7 @@
         }
     ],
 	"require": {
-		"laravel/frmework": "dev-master",
+		"laravel/framework": "dev-master",
 		"guzzlehttp/guzzle": "~4.0",
 		"doctrine/dbal": "2.4.*",
 		"intervention/image": "^2.3@dev",
